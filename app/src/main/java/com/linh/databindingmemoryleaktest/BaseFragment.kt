@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
     private var _binding: DB? = null
@@ -32,4 +34,8 @@ abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
     }
 
     abstract fun getLayoutId(): Int
+
+    fun <T> LiveData<T>.observe(observer: Observer<T>) {
+        this.observe(viewLifecycleOwner, observer)
+    }
 }
